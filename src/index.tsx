@@ -41,6 +41,7 @@ type Props<ItemT> = {
   doneLabel: string;
   nextLabel: string;
   prevLabel: string;
+  dotJustifyContent: string;
   showDoneButton: boolean;
   showNextButton: boolean;
   showPrevButton: boolean;
@@ -70,6 +71,7 @@ export default class AppIntroSlider<ItemT = any> extends React.Component<
     doneLabel: 'Done',
     nextLabel: 'Next',
     prevLabel: 'Back',
+    dotJustifyContent: 'flex-start',
     showDoneButton: true,
     showNextButton: true,
     showPrevButton: false,
@@ -208,9 +210,9 @@ export default class AppIntroSlider<ItemT = any> extends React.Component<
       : this._renderNextButton();
 
     return (
-      <View style={styles.paginationContainer}>
+      <View style={this.props.dotJustifyContent === 'flex-start' ? styles.paginationContainer : this.props.dotJustifyContent === 'center' ? styles.paginationContainerCenter : this.props.dotJustifyContent === 'flex-end' ? styles.paginationContainerFlexEnd : ''}>
         <SafeAreaView>
-          <View style={styles.paginationDots}>
+          <View style={this.props.dotJustifyContent === 'flex-start' ? styles.paginationDots : this.props.dotJustifyContent === 'center' ? styles.paginationDotsCenter : this.props.dotJustifyContent === 'flex-end' ? styles.paginationDotsFlexEnd : ''}>
             {this.props.data.length > 1 &&
               this.props.data.map((_, i) =>
                 this.props.dotClickEnabled ? (
@@ -287,6 +289,7 @@ export default class AppIntroSlider<ItemT = any> extends React.Component<
       doneLabel,
       nextLabel,
       prevLabel,
+      dotJustifyContent,
       renderItem,
       data,
       extraData,
@@ -338,11 +341,39 @@ const styles = StyleSheet.create({
     right: 16,
     justifyContent: 'flex-start',
   },
+  paginationContainerCenter: {
+    position: 'absolute',
+    bottom: 16,
+    left: 16,
+    right: 16,
+    justifyContent: 'center',
+  },
+  paginationContainerFlexEnd: {
+    position: 'absolute',
+    bottom: 16,
+    left: 16,
+    right: 16,
+    justifyContent: 'flex-end',
+  },
   paginationDots: {
     height: 16,
     margin: 16,
     flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
     justifyContent: 'flex-start',
+    alignItems: 'center',
+  },
+  paginationDotsCenter: {
+    height: 16,
+    margin: 16,
+    flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  paginationDotsFlexEnd: {
+    height: 16,
+    margin: 16,
+    flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
+    justifyContent: 'flex-end',
     alignItems: 'center',
   },
   dot: {
