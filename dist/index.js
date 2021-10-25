@@ -90,9 +90,13 @@ class AppIntroSlider extends React.Component {
             const primaryButton = isLastSlide
                 ? this._renderDoneButton()
                 : this._renderNextButton();
-            return (<react_native_1.View style={styles.paginationContainer}>
+            return (<react_native_1.View style={this.props.dotJustifyContent === 'center'
+                ? styles.paginationContainerCenter
+                : styles.paginationContainer}>
         <react_native_1.SafeAreaView>
-          <react_native_1.View style={styles.paginationDots}>
+          <react_native_1.View style={this.props.dotJustifyContent === 'center'
+                ? styles.paginationDotsCenter
+                : styles.paginationDots}>
             {this.props.data.length > 1 &&
                 this.props.data.map((_, i) => this.props.dotClickEnabled ? (<react_native_1.TouchableOpacity key={i} style={[
                     styles.dot,
@@ -145,7 +149,7 @@ class AppIntroSlider extends React.Component {
     render() {
         // Separate props used by the component to props passed to FlatList
         /* eslint-disable @typescript-eslint/no-unused-vars */
-        const { renderPagination, activeDotStyle, dotStyle, skipLabel, doneLabel, nextLabel, prevLabel, renderItem, data, extraData, ...otherProps } = this.props;
+        const { renderPagination, activeDotStyle, dotStyle, skipLabel, doneLabel, nextLabel, prevLabel, dotJustifyContent, renderItem, data, extraData, ...otherProps } = this.props;
         /* eslint-enable @typescript-eslint/no-unused-vars */
         // Merge component width and user-defined extraData
         const extra = merge_extradata_1.default(extraData, this.state.width);
@@ -172,6 +176,7 @@ AppIntroSlider.defaultProps = {
     doneLabel: 'Done',
     nextLabel: 'Next',
     prevLabel: 'Back',
+    dotJustifyContent: 'flex-start',
     showDoneButton: true,
     showNextButton: true,
     showPrevButton: false,
@@ -193,11 +198,39 @@ const styles = react_native_1.StyleSheet.create({
         right: 16,
         justifyContent: 'flex-start',
     },
+    paginationContainerCenter: {
+        position: 'absolute',
+        bottom: 16,
+        left: 16,
+        right: 16,
+        justifyContent: 'center',
+    },
+    paginationContainerFlexEnd: {
+        position: 'absolute',
+        bottom: 16,
+        left: 16,
+        right: 16,
+        justifyContent: 'flex-end',
+    },
     paginationDots: {
         height: 16,
         margin: 16,
         flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
         justifyContent: 'flex-start',
+        alignItems: 'center',
+    },
+    paginationDotsCenter: {
+        height: 16,
+        margin: 16,
+        flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    paginationDotsFlexEnd: {
+        height: 16,
+        margin: 16,
+        flexDirection: isAndroidRTL ? 'row-reverse' : 'row',
+        justifyContent: 'flex-end',
         alignItems: 'center',
     },
     dot: {

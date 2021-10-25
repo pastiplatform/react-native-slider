@@ -23,6 +23,7 @@ declare type Props<ItemT> = {
     doneLabel: string;
     nextLabel: string;
     prevLabel: string;
+    dotJustifyContent: string;
     showDoneButton: boolean;
     showNextButton: boolean;
     showPrevButton: boolean;
@@ -47,6 +48,7 @@ export default class AppIntroSlider<ItemT = any> extends React.Component<Props<I
         doneLabel: string;
         nextLabel: string;
         prevLabel: string;
+        dotJustifyContent: string;
         showDoneButton: boolean;
         showNextButton: boolean;
         showPrevButton: boolean;

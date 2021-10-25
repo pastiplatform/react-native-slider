@@ -210,9 +210,19 @@ export default class AppIntroSlider<ItemT = any> extends React.Component<
       : this._renderNextButton();
 
     return (
-      <View style={this.props.dotJustifyContent === 'flex-start' ? styles.paginationContainer : this.props.dotJustifyContent === 'center' ? styles.paginationContainerCenter : this.props.dotJustifyContent === 'flex-end' ? styles.paginationContainerFlexEnd : ''}>
+      <View
+        style={
+          this.props.dotJustifyContent === 'center'
+            ? styles.paginationContainerCenter
+            : styles.paginationContainer
+        }>
         <SafeAreaView>
-          <View style={this.props.dotJustifyContent === 'flex-start' ? styles.paginationDots : this.props.dotJustifyContent === 'center' ? styles.paginationDotsCenter : this.props.dotJustifyContent === 'flex-end' ? styles.paginationDotsFlexEnd : ''}>
+          <View
+            style={
+              this.props.dotJustifyContent === 'center'
+                ? styles.paginationDotsCenter
+                : styles.paginationDots
+            }>
             {this.props.data.length > 1 &&
               this.props.data.map((_, i) =>
                 this.props.dotClickEnabled ? (
