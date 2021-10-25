@@ -200,7 +200,7 @@ const styles = react_native_1.StyleSheet.create({
     },
     paginationContainerCenter: {
         position: 'absolute',
-        bottom: 16,
+        bottom: 0,
         left: 16,
         right: 16,
         justifyContent: 'center',
